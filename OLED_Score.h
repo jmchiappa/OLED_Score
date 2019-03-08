@@ -17,16 +17,16 @@
 #include "Number.h"
 
 #define YPOS_DISPLAY 64-BMP_NB_HEIGHT
-#if (SSD1306_LCDHEIGHT != 64)
-#error("Height incorrect, please fix Adafruit_SSD1306.h!");
-#endif
+// #if (SSD1306_LCDHEIGHT != 64)
+// #error("Height incorrect, please fix Adafruit_SSD1306.h!");
+// #endif
 
-class Oled_Score
+class Oled_Score : public Adafruit_SSD1306
 {
 public:
 	Oled_Score(TwoWire *dev_i2c = &Wire);
 	void init(void);
-	void display(uint16_t score);
+	void print(uint16_t score);
 
 private:
 	uint8_t _sda=SDA;
