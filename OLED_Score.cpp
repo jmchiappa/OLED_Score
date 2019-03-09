@@ -9,13 +9,13 @@
 
 Oled_Score::Oled_Score(TwoWire *dev_i2c) : // define new I2C for specific application
 	Disp_Wire(dev_i2c),
-	Adafruit_SSD1306(128,64, Disp_Wire)
+	Adafruit_SSD1306(128,64, dev_i2c)
 {}
 
 void Oled_Score::init(void)
 {
   begin(SSD1306_SWITCHCAPVCC, 0x3C, Disp_Wire);  // initialize with the I2C addr 0x3D (for the 128x64)
-  Disp_Wire->setClock(I2C_400KHZ);
+  //Disp_Wire->setClock(I2C_400KHZ);
   clearDisplay();
   dim(false);
 }
