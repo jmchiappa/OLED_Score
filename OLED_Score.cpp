@@ -1,21 +1,21 @@
 #include "OLED_Score.h"
 
-/*#define SDA2	43	// PB14
-#define SCL2	44	// PB13
-*/
-#define I2C_400KHZ	400000	//Hz, HIGH SPEED I2C
-//TwoWire WIRE2(SDA2, SCL2);  //SDA=PB11 & SCL=PB10
-
+#define I2C_SPEED	400000	//Hz, HIGH SPEED I2C
 
 Oled_Score::Oled_Score(TwoWire *dev_i2c) : // define new I2C for specific application
 	Disp_Wire(dev_i2c),
-	Adafruit_SSD1306(128,64, dev_i2c)
+	Adafruit_SSD1306(128,64, dev_i2c,-1,I2C_SPEED)
 {}
 
 void Oled_Score::init(void)
 {
-  begin(SSD1306_SWITCHCAPVCC, 0x3C, Disp_Wire);  // initialize with the I2C addr 0x3D (for the 128x64)
-  //Disp_Wire->setClock(I2C_400KHZ);
+	/* new begin prototype :
+	* SSD1306_SWITCHCAPVCC : use internal step up
+	* 0x3C : I2C address
+	* -1 : no reset pin connected
+	* true : force a Disp_Wire->begin() in the new SSD1306 begin()
+	*/
+  begin(SSD1306_SWITCHCAPVCC, 0x3C, -1,false);  // initialize with the I2C addr 0x3D (for the 128x64)
   clearDisplay();
   dim(false);
 }
