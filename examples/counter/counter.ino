@@ -1,7 +1,7 @@
 #include "OLED_Score.h"
 
 uint16_t value=0;
-TwoWire Disp_Wire(6,39); // SDA , SDL
+TwoWire Disp_Wire(SDA,SCL); // SDA , SDL
 
 Oled_Score Afficheur(&Disp_Wire);
 
@@ -14,6 +14,6 @@ void loop()
   //Serial.print(".");
 	//CurrentTimeSeconds = millis()/1000;
 
-	Afficheur.display(value++);
+	Afficheur.print(value++);
 	value%=1000;
 }
